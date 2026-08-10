@@ -87,6 +87,11 @@ test("generated page uses shared helpers and contains valid inline JavaScript", 
   assert.match(html, /const offsetQs = '&altitudeOffset=' \+ encodeURIComponent\(altitudeOffset\)/);
   assert.match(html, /SEARCH_API \+ '\?mode=' \+ searchMode \+ '&q=' \+ encodeURIComponent\(q\)/);
   assert.match(html, /searchMode === 'around' \? '&lat=' \+ lat \+ '&lon=' \+ lon : ''/);
+  assert.match(html, /function hideSearchResults\(\)/);
+  assert.match(html, /function showCachedSearchResults\(\)/);
+  assert.match(html, /function setPos\(newLat, newLon, label\) \{\s*hideSearchResults\(\);/);
+  assert.match(html, /searchInput'\)\.addEventListener\('focus', showCachedSearchResults/);
+  assert.match(html, /searchInput'\)\.addEventListener\('click', showCachedSearchResults/);
   assert.match(html, /<section class="selection-head no-title" id="selectionHead">/);
   assert.match(html, /<h1 id="selectionTitle"><\/h1>/);
   assert.match(html, /<div class="status" id="status"><\/div>/);

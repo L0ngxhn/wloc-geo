@@ -377,6 +377,7 @@ function formatCoords(lo, la) {
   return '经度 ' + formatDms(lo) + '  纬度 ' + formatDms(la);
 }
 function setPos(newLat, newLon, label) {
+  hideSearchResults();
   lat = newLat; lon = normLon(newLon); selected = true;
   marker.setLatLng([lat, lon]);
   if (amapMarker) {
@@ -824,6 +825,14 @@ function renderSearchResults() {
   });
 }
 
+function hideSearchResults() {
+  document.getElementById('searchResults').classList.remove('show');
+}
+
+function showCachedSearchResults() {
+  if (placeResults.length || searchState) renderSearchResults();
+}
+
 function selectSearchResult(index) {
   const place = placeResults[index];
   if (!place) return;
@@ -843,6 +852,8 @@ document.addEventListener('paste', e => {
   }
 });
 document.getElementById('searchInput').addEventListener('keydown', e => { if(e.key==='Enter') searchPlace(); });
+document.getElementById('searchInput').addEventListener('focus', showCachedSearchResults);
+document.getElementById('searchInput').addEventListener('click', showCachedSearchResults);
 document.getElementById('urlInput').addEventListener('keydown', e => { if(e.key==='Enter') parseUrl(); });
 document.getElementById('favNameInput').addEventListener('keydown', e => { if(e.key==='Enter') confirmFav(); });
 
