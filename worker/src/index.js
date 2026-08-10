@@ -50,7 +50,7 @@ app.all("/_AMapService/*", async (c) => {
 });
 
 // 地点搜索: 由 Worker 代调用高德 Web 服务，AMAP_KEY 不会下发到浏览器。
-// 普通搜索按当前坐标排序，周边搜索固定在当前坐标 2 km 内；返回坐标统一为 WGS84。
+// 普通搜索按关键词返回；周边搜索以给定坐标为中心 2 km；返回坐标统一为 WGS84。
 app.get("/api/search", async (c) => {
   c.header("Cache-Control", "no-store");
   try {
@@ -79,15 +79,15 @@ app.get("/api/search", async (c) => {
       && centerLatRaw.trim() !== "" && centerLonRaw.trim() !== ""
       && Number.isFinite(centerLat) && Number.isFinite(centerLon)
       && Math.abs(centerLat) <= 90 && Math.abs(centerLon) <= 180;
-    if (mode === "around" && !hasValidCenter) {
-      return c.json({ error: "周边搜索需要有效的中心坐标" }, 400);
-    }
-    if (hasValidCenter) {
+    if (mode === "around") {
+      if (!hasValidCenter) {
+        return c.json({ error: "周边搜索需要有效的中心坐标" }, 400);
+      }
       const center = wgs84ToGcj02(centerLat, centerLon);
       params.set("location", `${center.lon},${center.lat}`);
       params.set("sortrule", "distance");
+      params.set("radius", "2000");
     }
-    if (mode === "around") params.set("radius", "2000");
 
     const response = await fetch(`https://restapi.amap.com/v3/place/${mode}?${params}`, {
       headers: { accept: "application/json" },

@@ -756,7 +756,8 @@ async function searchPlace() {
   searchState = null;
   renderSearchResults();
   try {
-    const url = SEARCH_API + '?mode=' + searchMode + '&q=' + encodeURIComponent(q) + '&lat=' + lat + '&lon=' + lon;
+    const url = SEARCH_API + '?mode=' + searchMode + '&q=' + encodeURIComponent(q)
+      + (searchMode === 'around' ? '&lat=' + lat + '&lon=' + lon : '');
     const r = await fetch(url, { cache:'no-store' });
     const data = await r.json();
     if (token !== searchRequestToken) return;

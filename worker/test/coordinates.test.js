@@ -85,6 +85,8 @@ test("generated page uses shared helpers and contains valid inline JavaScript", 
   assert.match(html, /const SAVE_API = 'https:\/\/gs-loc\.apple\.com\/wloc-settings\/save'/);
   assert.match(html, /SAVE_API \+ '\?lon=' \+ lon \+ '&lat=' \+ lat \+ '&acc=25' \+ altQs \+ offsetQs/);
   assert.match(html, /const offsetQs = '&altitudeOffset=' \+ encodeURIComponent\(altitudeOffset\)/);
+  assert.match(html, /SEARCH_API \+ '\?mode=' \+ searchMode \+ '&q=' \+ encodeURIComponent\(q\)/);
+  assert.match(html, /searchMode === 'around' \? '&lat=' \+ lat \+ '&lon=' \+ lon : ''/);
   assert.match(html, /<section class="selection-head no-title" id="selectionHead">/);
   assert.match(html, /<h1 id="selectionTitle"><\/h1>/);
   assert.match(html, /<div class="status" id="status"><\/div>/);

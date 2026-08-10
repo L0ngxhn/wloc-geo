@@ -104,6 +104,27 @@ test("/api/search keeps text search as the default mode", async (t) => {
   assert.equal(response.status, 200);
   assert.equal(upstreamUrl.pathname, "/v3/place/text");
   assert.equal(upstreamUrl.searchParams.has("radius"), false);
+  assert.equal(upstreamUrl.searchParams.has("location"), false);
+  assert.equal(upstreamUrl.searchParams.has("sortrule"), false);
+});
+
+test("/api/search allows text search without a center", async (t) => {
+  let upstreamUrl;
+  t.mock.method(globalThis, "fetch", async (input) => {
+    upstreamUrl = new URL(input);
+    return Response.json({ status: "1", pois: [] });
+  });
+
+  const response = await app.request(
+    "https://worker.test/api/search?q=test",
+    undefined,
+    { AMAP_KEY: "test-key" }
+  );
+
+  assert.equal(response.status, 200);
+  assert.equal(upstreamUrl.pathname, "/v3/place/text");
+  assert.equal(upstreamUrl.searchParams.has("location"), false);
+  assert.equal(upstreamUrl.searchParams.has("sortrule"), false);
 });
 
 test("/api/search rejects around search without a valid center", async () => {
