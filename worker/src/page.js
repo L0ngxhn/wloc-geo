@@ -330,6 +330,11 @@ if (window.AMap) {
   });
 }
 
+if (!amapMap) {
+  const amapButton = document.querySelector('.layer-btn[data-layer="amap"]');
+  if (amapButton) amapButton.style.display = 'none';
+}
+
 function switchLayer(name) {
   if (name === 'amap') {
     if (!amapMap) { toast('高德地图加载失败，请检查 AMAP_JS_KEY 配置', 4000); return; }
