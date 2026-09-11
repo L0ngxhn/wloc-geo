@@ -2,7 +2,7 @@
 
 > 测试阶段。修改 Apple 网络定位（WLOC）返回的经纬度、精度和海拔。
 
-本项目基于 [Yu9191/wloc](https://github.com/Yu9191/wloc) 修改，增加了官方高德地图、地点搜索、地图链接解析、海拔查询和新版选点界面。
+本项目基于 `Yu9191/wloc` 修改，增加了官方高德地图、地点搜索、地图链接解析、海拔查询和新版选点界面。原仓库已不可访问，现由下方维护仓库提供订阅和脚本资源。
 
 ## 工作原理
 
@@ -29,13 +29,15 @@ Worker 不保存用户选择的坐标；坐标保存在代理软件的本地持�
 
 ## 模块订阅
 
+当前维护仓库：[L0ngxhn/wloc-geo](https://github.com/L0ngxhn/wloc-geo)。以下订阅、模块脚本和图标均从此仓库的 `main` 分支加载。
+
 | 工具 | 订阅链接 |
 |------|----------|
-| Surge | `https://raw.githubusercontent.com/yyyacc/wloc-geo/refs/heads/main/modules/wloc.sgmodule` |
-| Loon | `https://raw.githubusercontent.com/yyyacc/wloc-geo/refs/heads/main/modules/wloc.lpx` |
-| Stash | `https://raw.githubusercontent.com/yyyacc/wloc-geo/refs/heads/main/modules/wloc.stoverride` |
-| Quantumult X | `https://raw.githubusercontent.com/yyyacc/wloc-geo/refs/heads/main/modules/wloc.conf` |
-| Shadowrocket（小火箭） | `https://raw.githubusercontent.com/yyyacc/wloc-geo/refs/heads/main/modules/wloc.module` |
+| Surge | `https://raw.githubusercontent.com/L0ngxhn/wloc-geo/refs/heads/main/modules/wloc.sgmodule` |
+| Loon | `https://raw.githubusercontent.com/L0ngxhn/wloc-geo/refs/heads/main/modules/wloc.lpx` |
+| Stash | `https://raw.githubusercontent.com/L0ngxhn/wloc-geo/refs/heads/main/modules/wloc.stoverride` |
+| Quantumult X | `https://raw.githubusercontent.com/L0ngxhn/wloc-geo/refs/heads/main/modules/wloc.conf` |
+| Shadowrocket（小火箭） | `https://raw.githubusercontent.com/L0ngxhn/wloc-geo/refs/heads/main/modules/wloc.module` |
 
 模块包含两条规则：
 
@@ -67,7 +69,7 @@ MITM 主机名：`gs-loc.apple.com, gs-loc-cn.apple.com`。使用前需要在代
 
 完整 Worker 位于 `worker/` 子目录。它不需要 KV 或数据库；基础卫星地图、坐标保存、链接解析和海拔查询也不需要环境变量。官方高德地图和地点搜索需要额外配置高德凭据。
 
-[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/yyyacc/wloc-geo/tree/main/worker)
+[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/L0ngxhn/wloc-geo/tree/main/worker)
 
 使用 Cloudflare Git 集成时设置：
 
